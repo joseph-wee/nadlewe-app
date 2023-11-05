@@ -1,44 +1,50 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { NavigationProp } from '@react-navigation/native';
 
-// Define your navigation routes in RootStackParamList
 type RootStackParamList = {
-  Search: undefined;  // Define the type for the 'Search' route
-  Register: undefined; // Define the type for the 'Register' route
-  // Define more routes if you have them
+  Search: undefined;
+  Register: undefined;
 };
 
-// Define the Props type including the navigation
 type Props = {
   navigation: NavigationProp<RootStackParamList>;
 };
 
 const Login: React.FC<Props> = ({ navigation }) => {
-  // The rest of your component
+
+  const pointColor = '#2FDBBC';
+
   return (
-    <View style={tw`flex-1 bg-white justify-center px-4`}>
-      <Text style={tw`text-center text-2xl font-bold mb-8`}>로그인</Text>
-      
+    <View style={tw`flex-1 bg-white px-4 justify-start`}>
+      <Text style={tw`text-2xl font-bold mb-8 mt-4`}>로그인</Text>
+      <View style={tw`mb-4 items-center`}>
+        <Image
+          source={require('../assets/login.png')}
+          style={{ width: 200, height: 200, resizeMode: 'contain' }}
+        />
+      </View>
       <View style={tw`mb-4`}>
-        <Text style={tw`mb-2`}>EMAIL</Text>
-        <TextInput
-          style={tw`border border-gray-300 rounded-md px-3 py-2`}
+        <Text style={tw`mb-2 text-gray-700`}>EMAIL</Text>
+        <TextInput 
+        style={tw`h-10 px-4 bg-gray-200 rounded-full`} 
           placeholder="john.doe@email.com"
+          placeholderTextColor="#A0AEC0" 
           keyboardType="email-address"
         />
       </View>
       <View style={tw`mb-4`}>
-        <Text style={tw`mb-2`}>PASSWORD</Text>
-        <TextInput
-          style={tw`border border-gray-300 rounded-md px-3 py-2`}
+        <Text style={tw`mb-2 text-gray-700`}>PASSWORD</Text>
+        <TextInput 
+        style={tw`h-10 px-4 bg-gray-200 rounded-full mb-8`} 
           placeholder="Password"
+          placeholderTextColor="#A0AEC0" // 플레이스홀더 색상
           secureTextEntry
         />
       </View>
       <TouchableOpacity
-        style={tw`bg-blue-500 rounded-md py-2 mb-4`}
+        style={[tw`rounded-full py-2 mb-4`, { backgroundColor: pointColor }]}
         onPress={() => navigation.navigate("Search")}
       >
         <Text style={tw`text-center text-white text-lg`}>LOGIN</Text>
@@ -46,11 +52,17 @@ const Login: React.FC<Props> = ({ navigation }) => {
       <View style={tw`flex-row justify-center`}>
         <Text style={tw`text-gray-700 mr-1`}>Don't have an account?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={tw`text-blue-500`}>Register</Text>
+          <Text style={{ color: pointColor }}>Register</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    color: '#2D3748',
+  },
+});
 
 export default Login;
