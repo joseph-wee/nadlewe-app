@@ -28,7 +28,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
       <View style={tw`mb-4`}>
         <Text style={tw`mb-2 text-gray-700`}>EMAIL</Text>
         <TextInput 
-        style={tw`h-10 px-4 bg-gray-200 rounded-full`} 
+        style={[tw`h-10 px-4 rounded-full `, { backgroundColor: '#F4F4F4'}]}
           placeholder="john.doe@email.com"
           placeholderTextColor="#A0AEC0" 
           keyboardType="email-address"
@@ -37,7 +37,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
       <View style={tw`mb-4`}>
         <Text style={tw`mb-2 text-gray-700`}>PASSWORD</Text>
         <TextInput 
-        style={tw`h-10 px-4 bg-gray-200 rounded-full mb-8`} 
+        style={[tw`h-10 px-4 rounded-full `, { backgroundColor: '#F4F4F4'}]} 
           placeholder="Password"
           placeholderTextColor="#A0AEC0" // 플레이스홀더 색상
           secureTextEntry
