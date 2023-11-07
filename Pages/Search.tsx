@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet,TouchableOpacity  } from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity,Image  } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import MultiSlider from '@ptomasroos/react-native-multi-slider'; // Ensure this package is installed
 import { Picker } from '@react-native-picker/picker';
@@ -15,16 +15,24 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   const [selectedTheme, setSelectedTheme] = useState();
   const [selectedValue, setSelectedValue] = useState<number>(1);
   const [additionalPickers, setAdditionalPickers] = useState<JSX.Element[]>([]);
-  const [activeButton, setActiveButton] = useState(null);
+  const [activeButtons, setActiveButtons] = useState<string[]>([]);
 
   // 버튼을 렌더링하기 위한 배열
   const buttons = ['한식', '양식', '중식', '일식'];
-  const handleButtonPress = (value: React.SetStateAction<null>) => {
-    setActiveButton(value); // 선택된 버튼 상태 업데이트
+  const handleButtonPress = (value: string) => {
+    setActiveButtons(prevActiveButtons => {
+      if (prevActiveButtons.includes(value)) {
+        // 이미 선택된 버튼을 다시 클릭하면 선택 해제
+        return prevActiveButtons.filter(button => button !== value);
+      } else {
+        // 선택되지 않은 버튼을 클릭하면 선택
+        return [...prevActiveButtons, value];
+      }
+    });
   };
 
   // 선택된 버튼에 따라 스타일을 결정하는 함수
-  const getButtonStyle = (value: null) => {
+  const getButtonStyle = (value: string) => {
     return {
       // 기본 스타일
       padding: 10,
@@ -32,7 +40,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
       borderWidth: 1,
       borderColor: '#ccc',
       // 선택된 버튼이면 배경색을 변경
-      backgroundColor: activeButton === value ? 'blue' : 'white',
+      backgroundColor: activeButtons.includes(value) ? 'blue' : 'white',
     };
   };
   const multiSliderValuesChange = (values: number[]) => setPriceRange(values);
@@ -43,7 +51,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
       pickers.push(
         <Picker
           key={i}
-          selectedValue={1}
+          selectedValue={selectedValue}
           style={styles.picker}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
         >
@@ -100,7 +108,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
             style={tw`flex-1`}
             dropdownIconColor="#A0AEC0"
           >
-            {/* 성별 선택 옵션 */}
+            {}
             <Picker.Item label="" value="" />
             <Picker.Item label="로맨틱" value="male" />
             <Picker.Item label="활동적" value="female" />
@@ -109,7 +117,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
         </View>
       </View>
       <Text style={tw`mb-2 text-gray-700`}>코스장소갯수</Text>
-      <View style={tw`flex-1 bg-white px-4 py-4`}>
+      <View>
       {/* Picker to select the number of additional pickers */}
 
       <Picker
@@ -128,7 +136,10 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
       </Picker>
 
       {/* Render the additional pickers */}
-      {additionalPickers.map((picker) => picker)}
+      <View style={styles.pickerContainer}>
+    {/* Render the additional pickers */}
+    {additionalPickers.map((picker) => picker)}
+  </View>
       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
         {buttons.map((button) => (
           <TouchableOpacity
@@ -140,10 +151,19 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
+      <View style={tw`mb-4 items-center`}>
+        <Image
+          source={require('../assets/talk.png')}
+          style={{ width: 200, height: 200, resizeMode: 'contain' }}
+        />
+      </View>
     </View>
-    <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={{ color: pointColor }}>Register</Text>
-        </TouchableOpacity>
+    <TouchableOpacity
+        style={[tw`rounded-full py-2 mb-4`, { backgroundColor: pointColor }]}
+        onPress={() => navigation.navigate("Search")}
+      >
+        <Text style={tw`text-center text-white text-lg`}>CREATE CORSE</Text>
+      </TouchableOpacity>
     </View>
     
     
@@ -171,9 +191,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     slipDisplacement: 40,
   },
+  pickerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   picker: {
     height: 50,
-    width: '100%',
+    flex: 1, // 가로로 균등하게 피커들을 배분
   },
 });
 
