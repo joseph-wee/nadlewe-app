@@ -140,17 +140,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
     {/* Render the additional pickers */}
     {additionalPickers.map((picker) => picker)}
   </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-        {buttons.map((button) => (
-          <TouchableOpacity
-            key={button}
-            style={getButtonStyle(button)}
-            onPress={() => handleButtonPress(button)}
-          >
-            <Text>{button}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+      
       <View style={tw`mb-4 items-center`}>
         <Image
           source={require('../assets/talk.png')}
