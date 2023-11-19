@@ -10,20 +10,26 @@ type SearchProps = {
 type Tag = {
   key: string;
   icon: ImageSourcePropType;
+  icon2: ImageSourcePropType;
+};
+
+type Category = {
+  key: string;
 };
 type SelectedTag = Tag & { id: string };
 const tagsData: Tag[] = [
-  { key: '식사', icon: require('../assets/icons/icon_Utensils_w.png') },
-  { key: '카페', icon: require('../assets/icons/icon_MugHot_w.png') },
-  { key: '활동', icon: require('../assets/icons/icon_Running_w.png') },
-  { key: '숙소', icon: require('../assets/icons/icon_Bed_w.png') },
+  { key: '식사', icon: require('../assets/icons/icon_Utensils_w.png'),icon2: require('../assets/icons/icon_Utensils_b.png') },
+  { key: '카페', icon: require('../assets/icons/icon_MugHot_w.png'),icon2: require('../assets/icons/icon_MugHot_b.png')  },
+  { key: '활동', icon: require('../assets/icons/icon_Running_w.png'),icon2: require('../assets/icons/icon_Running_b.png') },
+  { key: '숙소', icon: require('../assets/icons/icon_Bed_w.png'),icon2: require('../assets/icons/icon_Bed_b.png') },
 ];
+
 const Search: React.FC<SearchProps> = ({ navigation }) => {
   const pointColor = '#2FDBBC';
 
   const [priceRange, setPriceRange] = useState([1000, 50000]);
   const [selectedTags, setSelectedTags] = useState<SelectedTag[]>([]);
-  
+  const [selectedTagKeys, setSelectedTagKeys] = useState<string[]>([]); //카테고리
   // 태그 선택
   const selectTag = (tag: Tag) => {
     // 태그 선택 시 현재 시각과 랜덤 값을 조합하여 고유 ID 생성
@@ -44,15 +50,13 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   const renderTag = ({ item }: { item: Tag }) => (
     <TouchableOpacity style={styles.tag} onPress={() => selectTag(item)}>
       <Image source={item.icon} style={styles.icon} />
-      <Text>{item.key}</Text>
+      <Text style={styles.tagText}>{item.key}</Text>
     </TouchableOpacity>
   );
-
   // 선택된 태그 렌더링
   const renderSelectedTag = ({ item, index }: { item: SelectedTag; index: number }) => (
     <View style={styles.selectedTag}>
-      <Image source={item.icon} style={styles.icon} />
-      <Text>{item.key}</Text>
+      <Image source={item.icon2} style={styles.icon} />
       <TouchableOpacity onPress={() => removeTag(item.id)}>
         <Text style={styles.removeIcon}>x</Text>
       </TouchableOpacity>
@@ -152,33 +156,43 @@ const styles = StyleSheet.create({
     flex: 1, // 가로로 균등하게 피커들을 배분
   },
   tag: {
-    margin: 10,
-    padding: 10,
+    backgroundColor:'#2FDBBC',
+    width:85,
+    height: 40,
+    margin: 5,
+    padding: 5,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 20,
-    alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row', // 아이콘과 텍스트를 가로로 배열합니다.
+    alignItems: 'center',
   },
   selectedTag: {
-    margin: 10,
-    padding: 10,
+    width:85,
+    height: 40,
+    margin: 5,
+    padding: 5,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 20,
+    justifyContent: 'center',
+    flexDirection: 'row', // 아이콘과 텍스트를 가로로 배열합니다.
     alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
   },
   icon: {
     width: 20,
     height: 20,
     marginRight: 5,
+    resizeMode: 'contain'
+    
   },
   removeIcon: {
     marginLeft: 5,
     color: 'red',
   },
+  tagText: {
+    color: 'white',}
 });
 
 export default Search;
