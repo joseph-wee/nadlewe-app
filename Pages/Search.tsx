@@ -13,9 +13,6 @@ type Tag = {
   icon2: ImageSourcePropType;
 };
 
-type Category = {
-  key: string;
-};
 type SelectedTag = Tag & { id: string };
 const tagsData: Tag[] = [
   { key: '식사', icon: require('../assets/icons/icon_Utensils_w.png'),icon2: require('../assets/icons/icon_Utensils_b.png') },
@@ -29,7 +26,11 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
 
   const [priceRange, setPriceRange] = useState([1000, 50000]);
   const [selectedTags, setSelectedTags] = useState<SelectedTag[]>([]);
-  const [selectedTagKeys, setSelectedTagKeys] = useState<string[]>([]); //카테고리
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const Category = ['한식','양식','중식','일식','분식','기타','카페','맥주/소주','막걸리','와인','위스키','칵테일','실내','실외','게임/오락','힐링','방탈출','클래스','영화','전시','책방'];
+  const FoodNum = 6;
+  const DrinkNum = 6;
+  const ActivityNum = 9;
   // 태그 선택
   const selectTag = (tag: Tag) => {
     // 태그 선택 시 현재 시각과 랜덤 값을 조합하여 고유 ID 생성
@@ -64,6 +65,31 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   );
   const multiSliderValuesChange = (values: number[]) => setPriceRange(values);
 
+  //카테고리
+  const handleButtonPress = (value: string) => {
+    setSelectedCategory(prevActiveButtons => {
+      if (prevActiveButtons.includes(value)) {
+        // 이미 선택된 버튼을 다시 클릭하면 선택 해제
+        return prevActiveButtons.filter(button => button !== value);
+      } else {
+        // 선택되지 않은 버튼을 클릭하면 선택
+        return [...prevActiveButtons, value];
+      }
+    });
+  };
+
+  // 선택된 버튼에 따라 스타일을 결정하는 함수
+  const getButtonStyle = (value: string) => {
+    return {
+      // 기본 스타일
+      padding: 10,
+      margin: 5,
+      borderWidth: 1,
+      borderColor: '#ccc',
+      // 선택된 버튼이면 배경색을 변경
+      backgroundColor: selectedCategory.includes(value) ? 'blue' : 'white',
+    };
+  };
   return (
     <View style={tw`flex-1 bg-white px-4 py-4`}>
       <Text style={tw`mb-2 text-gray-700`}>선호가격대</Text>
@@ -109,6 +135,19 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
           horizontal
         />
       </View>
+
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+    {Category.map((button) => (
+      <TouchableOpacity
+        key={button}
+        style={getButtonStyle(button)}
+        onPress={() => handleButtonPress(button)}
+      >
+        <Text>{button}</Text>
+      </TouchableOpacity>
+    ))}
+</View>
+
 
     <TouchableOpacity
         style={[tw`rounded-full py-2 mb-4`, { backgroundColor: pointColor }]}
@@ -192,7 +231,14 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   tagText: {
-    color: 'white',}
+    color: 'white',},
+  category:{
+    flexDirection: 'row', 
+    flexWrap: 'wrap', 
+    justifyContent: 'center', 
+    alignItems: 'center'
+
+  }
 });
 
 export default Search;
