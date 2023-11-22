@@ -98,13 +98,8 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   // 선택된 버튼에 따라 스타일을 결정하는 함수
   const getButtonStyle = (value: string) => {
     return {
-      // 기본 스타일
-      padding: 10,
-      margin: 5,
-      borderWidth: 1,
-      borderColor: '#ccc',
-      // 선택된 버튼이면 배경색을 변경
-      backgroundColor: selectedCategory.includes(value) ? 'blue' : 'white',
+      ...styles.categoryTag, // 기존 categoryTag 스타일을 적용
+      backgroundColor: selectedCategory.includes(value) ? '#2FDBBC' : '#ffffff', // 선택된 상태에 따라 배경색 변경
     };
   };
   return (
@@ -152,7 +147,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
           horizontal
         />
       </View>
-
+      <Text style={tw`mb-2 text-gray-700`}>데이트 코스 취향을 선택해주세요</Text>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
     {Category.map((button) => (
       <TouchableOpacity
@@ -255,6 +250,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center'
 
+  },
+  categoryTag : {
+    width:85,
+    height: 40,
+    margin: 4,
+    padding: 5,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 20,
+    justifyContent: 'center',
+    flexDirection: 'row', // 아이콘과 텍스트를 가로로 배열합니다.
+    alignItems: 'center',
   }
 });
 
