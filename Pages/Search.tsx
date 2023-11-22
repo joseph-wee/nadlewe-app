@@ -3,9 +3,11 @@ import { View, Text,FlatList, StyleSheet,TouchableOpacity,Image,ImageSourcePropT
 import tw from 'tailwind-react-native-classnames';
 import MultiSlider from '@ptomasroos/react-native-multi-slider'; // Ensure this package is installed
 import { Picker } from '@react-native-picker/picker';
+import axios from 'axios'; 
+
 
 type SearchProps = {
-  navigation: any; // You can define a more specific type for navigation if needed
+  navigation: any; 
 };
 type Tag = {
   key: string;
@@ -31,6 +33,21 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   const FoodNum = 6;
   const DrinkNum = 6;
   const ActivityNum = 9;
+
+  const sendToServer = async () => {
+    try {
+      const TagKeys = selectedTags.map(tag => tag.key);
+      const response = await axios.post('https://heheds.free.beeceptor.com', {
+        TagKeys,
+        selectedCategory,
+        priceRange,
+      });
+      console.log('서버 응답:', response.data);
+    } catch (error) {
+      console.error('서버 전송 오류:', error);
+    }
+  };
+
   // 태그 선택
   const selectTag = (tag: Tag) => {
     // 태그 선택 시 현재 시각과 랜덤 값을 조합하여 고유 ID 생성
@@ -151,7 +168,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
 
     <TouchableOpacity
         style={[tw`rounded-full py-2 mb-4`, { backgroundColor: pointColor }]}
-        onPress={() => navigation.navigate("Search")}
+        onPress={sendToServer}
       >
         <Text style={tw`text-center text-white text-lg`}>CREATE CORSE</Text>
       </TouchableOpacity>
