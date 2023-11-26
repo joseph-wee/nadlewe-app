@@ -36,9 +36,9 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
 
   const sendToServer = async () => {
     try {
-      const TagKeys = selectedTags.map(tag => tag.key);
+      const tagKeys = selectedTags.map(tag => tag.key);
       const response = await axios.post('https://heheds.free.beeceptor.com', {
-        TagKeys,
+        tagKeys,
         selectedCategory,
         priceRange,
       });

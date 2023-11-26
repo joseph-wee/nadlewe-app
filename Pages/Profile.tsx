@@ -18,7 +18,10 @@ const Profile = () => {
         </View>
 
         <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>주문내역</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+  <Image source={require('../assets/icons/clock.png')} style={styles.icon} />
+  <Text style={styles.sectionTitle}>주문내역</Text>
+</View>
           <FlatList
             horizontal
             data={orderData}
@@ -28,7 +31,11 @@ const Profile = () => {
           />
         </View>
         <View style={styles.sectionContainer}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Image source={require('../assets/icons/Heart.png')} style={styles.icon} />
+        
           <Text style={styles.sectionTitle}>내가 좋아요한 코스</Text>
+          </View>
           <FlatList
             horizontal
             data={orderData}
@@ -91,6 +98,13 @@ const styles = StyleSheet.create({
     marginRight: 10, // 박스 사이의 간격
     backgroundColor: '#f0f0f0', // 박스 배경색
     borderRadius: 10, // 박스 모서리 둥글기
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+    resizeMode: 'contain'
+    
   },
 });
 
