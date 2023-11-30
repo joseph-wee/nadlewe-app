@@ -31,8 +31,8 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const Category = ['한식','양식','중식','일식','분식','기타','카페','맥주/소주','막걸리','와인','위스키','칵테일','실내','실외','게임/오락','힐링','방탈출','클래스','영화','전시','책방'];
   const FoodNum = 6;
-  const DrinkNum = 6;
-  const ActivityNum = 9;
+  const DrinkNum = 12;
+  const ActivityNum = 21;
 
   const sendToServer = async () => {
     try {
@@ -148,8 +148,13 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
         />
       </View>
       <Text style={tw`mb-2 text-gray-700`}>데이트 코스 취향을 선택해주세요</Text>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
-    {Category.map((button) => (
+      
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+      <Text style={styles.categoryText}>식사</Text>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
+    {
+      
+    Category.slice(0, FoodNum).map((button) => (
       <TouchableOpacity
         key={button}
         style={getButtonStyle(button)}
@@ -157,7 +162,65 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
       >
         <Text>{button}</Text>
       </TouchableOpacity>
-    ))}
+    ))
+    
+    }
+</View>
+</View>
+
+<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+      <Text style={styles.categoryText}>마시기</Text>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
+    {
+      
+    Category.slice(FoodNum, DrinkNum).map((button) => (
+      <TouchableOpacity
+        key={button}
+        style={getButtonStyle(button)}
+        onPress={() => handleButtonPress(button)}
+      >
+        <Text>{button}</Text>
+      </TouchableOpacity>
+    ))
+    
+    }
+</View>
+</View>
+<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+      <Text style={styles.categoryText}>활동</Text>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+    {
+      
+    Category.slice(DrinkNum, DrinkNum+2).map((button) => (
+      <TouchableOpacity
+        key={button}
+        style={getButtonStyle(button)}
+        onPress={() => handleButtonPress(button)}
+      >
+        <Text>{button}</Text>
+      </TouchableOpacity>
+    ))
+    
+    }
+</View>
+</View>
+<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+<Text style={styles.categoryText}></Text>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
+    {
+      
+    Category.slice(DrinkNum+2, ActivityNum).map((button) => (
+      <TouchableOpacity
+        key={button}
+        style={getButtonStyle(button)}
+        onPress={() => handleButtonPress(button)}
+      >
+        <Text>{button}</Text>
+      </TouchableOpacity>
+    ))
+    
+    }
+</View>
 </View>
 
 
@@ -177,7 +240,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 10,
   },
   selectedTrack: {
     backgroundColor: '#2FDBBC',
@@ -262,6 +325,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row', // 아이콘과 텍스트를 가로로 배열합니다.
     alignItems: 'center',
+  },
+  categoryText:{
+    backgroundColor: 'transparent',
+    margin: 1, // 외부 여백
+    padding: 1, // 내부 여백
+    width: 20, // 박스의 너비
+    textAlign: 'center', // 텍스트 중앙 정렬
+    justifyContent: 'center', // 세로축에서도 중앙 정렬
+    alignItems: 'center', // 가로축에서도 중앙 정렬
+    display: 'flex', // flexbox를 사용한 정렬
   }
 });
 
