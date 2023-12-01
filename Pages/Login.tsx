@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
@@ -15,8 +16,15 @@ type Props = {
 const Login: React.FC<Props> = ({ navigation }) => {
 
   const pointColor = '#2FDBBC';
+=======
+import { View, Text, Button, Image } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { styled } from "nativewind";
+>>>>>>> Stashed changes
 
   return (
+<<<<<<< Updated upstream
     <View style={tw`flex-1 bg-white px-4 justify-start`}>
       <Text style={tw`text-2xl font-bold mb-8 mt-4`}>로그인</Text>
       <View style={tw`mb-4 items-center`}>
@@ -54,6 +62,17 @@ const Login: React.FC<Props> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text style={{ color: pointColor }}>Register</Text>
         </TouchableOpacity>
+=======
+    <View className="">
+      <Text className="bg-red-200">01</Text>
+      <Text style={{ fontFamily: "BM-HANNAStd", fontWeight: "400" }}>
+        주문내역
+      </Text>
+      <Text>주문내역</Text>
+      <View>
+        <Text>login</Text>
+        <Button title="test" onPress={() => navigation.navigate("Result")} />
+>>>>>>> Stashed changes
       </View>
     </View>
   );

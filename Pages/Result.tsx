@@ -2,657 +2,263 @@ import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 const Result = ({ navigation }: any) => {
-  const [v, SetV] = useState(0);
+  // 임시 데이터
+  const [result, setResult] = useState([
+    {
+      courses: [
+        {
+          courseName: "코스이름",
+          places: [
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+          ],
+          coursePrice: "123456",
+          courseImage: "../assets/dummyImage.png",
+        },
+      ],
+    },
+    {
+      courses: [
+        {
+          courseName: "코스이름",
+          places: [
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+          ],
+          coursePrice: "총 가격",
+          courseImage: "../assets/dummyImage.png",
+        },
+      ],
+    },
+    {
+      courses: [
+        {
+          courseName: "코스이름",
+          places: [
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+            {
+              placeName: "장소이름",
+              rate: "3.7",
+              menu: "메뉴",
+              menuDetail: "메뉴 상세",
+              placePrice: "가격",
+              placeImage: "../assets/dummyImage.png",
+            },
+          ],
+          coursePrice: "총 가격",
+          courseImage: "../assets/dummyImage.png",
+        },
+      ],
+    },
+  ]);
+
+  /** 별점 감싸고있는 블럭 너비 계산 */
+  const widthHandler = (rate: number) => {
+    const quotient = rate % 1; // 몫
+
+    return rate * 15 + quotient * 2;
+  };
 
   return (
-    <View style={{ paddingTop: 10 }}>
-      <View style={{ paddingLeft: 20, width: "100%", height: 40 }}>
-        여기에 광고 이미지
-      </View>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={{
-          padding: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          borderBottomColor: "#FFFFFF",
-          borderBottomWidth: 1,
-        }}
-        onPress={() => navigation.navigate("Detail")}
-      >
-        <View style={{ justifyContent: "space-between" }}>
-          <View>
-            {/** title */}
-            <Text style={{ marginBottom: 10 }}>남산타워</Text>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
+    <View style={{ backgroundColor: "white" }}>
+      <Image
+        style={{ width: "100%", height: 155, resizeMode: "cover" }}
+        source={require("../assets/ad_kfc.png")}
+      />
+      {result.map((data: any) => {
+        return (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={{
+              padding: 20,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              borderBottomColor: "#FFFFFF",
+              borderBottomWidth: 1,
+            }}
+            onPress={() => navigation.navigate("Detail")}
+          >
+            <View style={{ justifyContent: "space-between" }}>
+              <View>
+                {/** 코스 이름 */}
+                <Text style={{ marginBottom: 10, fontFamily: "BM-HANNAStd" }}>
+                  {`${data.courses[0].courseName}`}
+                </Text>
+                {/** 장소, 별점 리스트 */}
+                {data.courses[0].places.map((el: any) => {
+                  return (
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={{ justifyContent: "center" }}>
+                        <Text
+                          style={{
+                            fontFamily: "NanumGothic",
+                            minWidth: 85,
+                            fontSize: 12,
+                          }}
+                        >
+                          {`${el.placeName}`}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          gap: 2,
+                          height: 20,
+                          overflow: "hidden",
+                          width: widthHandler(el.rate),
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../assets/star.png")}
+                          style={{ width: 15, height: 15 }}
+                        />
+                        <Image
+                          source={require("../assets/star.png")}
+                          style={{ width: 15, height: 15 }}
+                        />
+                        <Image
+                          source={require("../assets/star.png")}
+                          style={{ width: 15, height: 15 }}
+                        />
+                        <Image
+                          source={require("../assets/star.png")}
+                          style={{ width: 15, height: 15 }}
+                        />
+                        <Image
+                          source={require("../assets/star.png")}
+                          style={{ width: 15, height: 15 }}
+                        />
+                      </View>
+                    </View>
+                  );
+                })}
               </View>
+              <Text
+                style={{ marginTop: 15, fontFamily: "NanumGothic" }}
+              >{`${data.courses[0].coursePrice} 원`}</Text>
             </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-          <Text>123,456원</Text>
-        </View>
-        {/** image */}
-        <Image
-          source={require("../assets/dummyImage.png")}
-          style={{ width: 150, height: 150, borderRadius: 20 }}
-        />
-      </TouchableOpacity>
-      {/** ----------- 여기 아래 복붙한거 -------- */}
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={{
-          padding: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          borderBottomColor: "#FFFFFF",
-          borderBottomWidth: 1,
-        }}
-        onPress={() => navigation.navigate("Detail")}
-      >
-        <View style={{ justifyContent: "space-between" }}>
-          <View>
-            {/** title */}
-            <Text style={{ marginBottom: 10 }}>남산타워</Text>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-          <Text>123,456원</Text>
-        </View>
-        <Image
-          source={require("../assets/dummyImage.png")}
-          style={{ width: 150, height: 150 }}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={{
-          padding: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          borderBottomColor: "#FFFFFF",
-          borderBottomWidth: 1,
-        }}
-        onPress={() => navigation.navigate("Detail")}
-      >
-        <View style={{ justifyContent: "space-between" }}>
-          <View>
-            {/** title */}
-            <Text style={{ marginBottom: 10 }}>남산타워</Text>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-          <Text>123,456원</Text>
-        </View>
-        <Image
-          source={require("../assets/dummyImage.png")}
-          style={{ width: 150, height: 150 }}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={{
-          padding: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          borderBottomColor: "#FFFFFF",
-          borderBottomWidth: 1,
-        }}
-        onPress={() => navigation.navigate("Detail")}
-      >
-        <View style={{ justifyContent: "space-between" }}>
-          <View>
-            {/** title */}
-            <Text style={{ marginBottom: 10 }}>남산타워</Text>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-          <Text>123,456원</Text>
-        </View>
-        <Image
-          source={require("../assets/dummyImage.png")}
-          style={{ width: 150, height: 150 }}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={{
-          padding: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          borderBottomColor: "#FFFFFF",
-          borderBottomWidth: 1,
-        }}
-        onPress={() => navigation.navigate("Detail")}
-      >
-        <View style={{ justifyContent: "space-between" }}>
-          <View>
-            {/** title */}
-            <Text style={{ marginBottom: 10 }}>남산타워</Text>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-          <Text>123,456원</Text>
-        </View>
-        <Image
-          source={require("../assets/dummyImage.png")}
-          style={{ width: 150, height: 150 }}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={{
-          padding: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          borderBottomColor: "#FFFFFF",
-          borderBottomWidth: 1,
-        }}
-        onPress={() => navigation.navigate("Detail")}
-      >
-        <View style={{ justifyContent: "space-between" }}>
-          <View>
-            {/** title */}
-            <Text style={{ marginBottom: 10 }}>남산타워</Text>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-            {/** place */}
-            <View style={{ flexDirection: "row", gap: 5 }}>
-              <Text style={{ minWidth: 85, marginBottom: 5 }}>박지후 스시</Text>
-              <View
-                style={{ flexDirection: "row", gap: 2, overflow: "hidden" }}
-              >
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-                <Image
-                  source={require("../assets/star.png")}
-                  style={{ width: 15, height: 15 }}
-                />
-              </View>
-            </View>
-          </View>
-          <Text>123,456원</Text>
-        </View>
-        <Image
-          source={require("../assets/dummyImage.png")}
-          style={{ width: 150, height: 150 }}
-        />
-      </TouchableOpacity>
+            {/** 이미지 */}
+            <Image
+              source={require(`../assets/dummyImage.png`)}
+              style={{
+                width: 150,
+                minHeight: 150,
+                height: "100%",
+                borderRadius: 20,
+                resizeMode: "cover",
+              }}
+            />
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
