@@ -24,6 +24,7 @@ const tagsData: Tag[] = [
 ];
 
 const Search: React.FC<SearchProps> = ({ navigation }) => {
+
   const pointColor = '#2FDBBC';
 
   const [priceRange, setPriceRange] = useState([1000, 50000]);
@@ -34,19 +35,14 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   const DrinkNum = 12;
   const ActivityNum = 21;
 
-  const sendToServer = async () => {
-    try {
-      const tagKeys = selectedTags.map(tag => tag.key);
-      const response = await axios.post('https://heheds.free.beeceptor.com', {
-        tagKeys,
-        selectedCategory,
-        priceRange,
-      });
-      console.log('서버 응답:', response.data);
-    } catch (error) {
-      console.error('서버 전송 오류:', error);
-    }
-  };
+  const sendToResult = async () => {
+    navigation.navigate('Result', {
+      priceRange: priceRange,
+      selectedTags: selectedTags,
+      selectedCategory: selectedCategory
+    });
+  }
+
 
   // 태그 선택
   const selectTag = (tag: Tag) => {
@@ -226,7 +222,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
 
     <TouchableOpacity
         style={[tw`rounded-full py-2 mb-4`, { backgroundColor: pointColor }]}
-        onPress={sendToServer}
+        onPress={sendToResult}
       >
         <Text style={tw`text-center text-white text-lg`}>CREATE CORSE</Text>
       </TouchableOpacity>

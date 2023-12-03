@@ -1,8 +1,26 @@
 import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import axios from 'axios'; 
 
-const Result = ({ navigation }: any) => {
+const Result = ({ navigation,route }: any) => {
   // 임시 데이터
+  const { priceRange, selectedTags,selectedCategory } = route.params;
+  console.log(priceRange, selectedTags,selectedCategory); //잘 받아지는 지 확인
+
+  const sendToServer = async () => { //axios로 서버에 전송
+    try {
+      const tagKeys = selectedTags.map((tag: { key: any; }) => tag.key);
+      const response = await axios.post('https://heheds.free.beeceptor.com', {
+        tagKeys,
+        selectedCategory,
+        priceRange,
+      });
+      console.log('서버 응답:', response.data);
+    } catch (error) {
+      console.error('서버 전송 오류:', error);
+    }
+  };
+
   const [result, setResult] = useState([
     {
       courses: [
