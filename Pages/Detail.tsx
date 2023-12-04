@@ -1,46 +1,42 @@
-import { useState } from "react";
-import { Image, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Image, Text, View, ScrollView } from "react-native";
 
-const Detail = () => {
+const Detail = ({ route }: any) => {
+  useEffect(() => {
+    console.log(route.params.courses[0].places);
+  }, []);
   // 임시 데이터
-  const [detail, setDetail] = useState([
-    {
-      placeIndex: "123",
-      placeName: "장소이름",
-      menu: "메뉴이름",
-      menuDetail: "메뉴상세",
-      placePrice: "장소 가격",
-      placeImage: "이미지",
-    },
-    {
-      placeIndex: "123",
-      placeName: "장소이름",
-      menu: "메뉴이름",
-      menuDetail: "메뉴상세",
-      placePrice: "장소 가격",
-      placeImage: "이미지",
-    },
-    {
-      placeIndex: "123",
-      placeName: "장소이름",
-      menu: "메뉴이름",
-      menuDetail: "메뉴상세",
-      placePrice: "장소 가격",
-      placeImage: "이미지",
-    },
-  ]);
+  const [detail, setDetail] = useState(route.params.courses[0].places);
+
   return (
-    <View style={{ backgroundColor: "white" }}>
+    <ScrollView style={{ backgroundColor: "white" }}>
       <Image
-        style={{ width: "100%", height: 155, resizeMode: "cover" }}
-        source={require("../assets/ad_kfc.png")}
+        style={{ width: "100%", height: 95, resizeMode: "cover" }}
+        source={require("../assets/ad_burger.png")}
       />
       <View style={{ padding: 20 }}>
-        <Text
-          style={{ marginBottom: 15, fontFamily: "BM-HANNAStd", fontSize: 16 }}
-        >
-          코스 소개
-        </Text>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <Text
+            style={{
+              marginBottom: 15,
+              fontFamily: "BM-HANNAStd",
+              fontSize: 16,
+              marginRight: 5,
+            }}
+          >
+            코스 소개
+          </Text>
+          <Image
+            style={{
+              width: 20,
+              height: 20,
+              position: "absolute",
+              right: 0,
+              top: -2,
+            }}
+            source={require("../assets/icons/Heart.png")}
+          />
+        </View>
         {/** 아이템 하나 */}
         {detail.map((el: any, index: number) => {
           return (
@@ -48,8 +44,9 @@ const Detail = () => {
               <Text
                 style={{ marginBottom: 10, fontFamily: "BM-HANNAStd" }}
               >{`${el.placeName}`}</Text>
+
               <Image
-                source={require("../assets/food.png")}
+                source={{ uri: `${el.placeImage}` }}
                 style={{
                   marginBottom: 20,
                   width: "100%",
@@ -57,6 +54,7 @@ const Detail = () => {
                   borderRadius: 20,
                 }}
               />
+
               <View
                 style={{
                   marginBottom: 12,
@@ -65,21 +63,23 @@ const Detail = () => {
                   minHeight: 23,
                 }}
               >
-                <Text
-                  style={{ fontFamily: "NanumGothic" }}
-                >{`${el.menu}`}</Text>
-                <Text
-                  style={{ fontFamily: "NanumGothic" }}
-                >{`${el.placePrice} 원`}</Text>
+                <Text style={{ fontFamily: "NanumGothic" }}>
+                  {el.menu && `${el.menu}`}
+                </Text>
+                <Text style={{ fontFamily: "NanumGothic" }}>
+                  {el.placePrice &&
+                    el.placePrice !== -1 &&
+                    `${el.placePrice.toLocaleString("ko-KR")} 원`}
+                </Text>
               </View>
-              <Text
+              {/* <Text
                 style={{ fontFamily: "NanumGothic", minHeight: 23 }}
-              >{`${el.menuDetail}`}</Text>
+              >{`${el.menuDetail}`}</Text> */}
             </View>
           );
         })}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
