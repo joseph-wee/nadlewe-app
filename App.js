@@ -49,7 +49,7 @@ export default function App() {
   return (
     <RecoilRoot>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator >
           <Stack.Screen name="Footer" component={Footer} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ title: "로그인" }} />
           <Stack.Screen name="Search" component={Search} options={{ title: "코스 생성" }} />
