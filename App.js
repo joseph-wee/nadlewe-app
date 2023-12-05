@@ -1,4 +1,4 @@
-import { RecoilEnv } from 'recoil';
+import { RecoilEnv, RecoilRoot } from 'recoil';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Cart, Detail, Favorite, Login, Profile, Register, Result, Search } from './Pages';
@@ -14,6 +14,12 @@ const Footer = () => {
 
   return (
     <Tab.Navigator>
+      <Tab.Screen name="Login" component={Login} options={{
+        title: "", headerTitle: "로그인",
+        tabBarIcon: () => (
+          <Image style={{ marginTop: 10, width: 20, height: 20 }} source={require("./assets/login_icon.png")} />
+        )
+      }} />
       <Tab.Screen name="Search" component={Search} options={{
         title: "", headerTitle: "코스 생성",
         tabBarIcon: () => (
@@ -26,6 +32,7 @@ const Footer = () => {
           <Image style={{ marginTop: 10, width: 20, height: 20 }} source={require("./assets/User.png")} />
         )
       }} />
+
     </Tab.Navigator>
   )
 }
@@ -36,29 +43,23 @@ export default function App() {
     'BM-HANNAStd': require("./assets/fonts/BMHANNA.ttf"),
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
 
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
 
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" >
-        <Stack.Screen name="Footer" component={Footer} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={Login} options={{ title: "로그인" }} />
-        <Stack.Screen name="Search" component={Search} options={{ title: "코스 생성" }} />
-        <Stack.Screen name="Register" component={Register} options={{ title: "회원가입" }} />
-        <Stack.Screen name="Result" component={Result} options={{ title: "검색 결과" }} />
-        <Stack.Screen name="Detail" component={Detail} options={{ title: "결제" }} />
-      </Stack.Navigator>
+    <RecoilRoot>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Login'>
+          <Stack.Screen name="Footer" component={Footer} options={{ headerShown: false }} />
+          <Stack.Screen name="Login" component={Login} options={{ title: "로그인" }} />
+          <Stack.Screen name="Search" component={Search} options={{ title: "코스 생성" }} />
+          <Stack.Screen name="Register" component={Register} options={{ title: "회원가입" }} />
+          <Stack.Screen name="Result" component={Result} options={{ title: "검색 결과" }} />
+          <Stack.Screen name="Detail" component={Detail} options={{ title: "결제" }} />
+        </Stack.Navigator>
 
-    </NavigationContainer>
+      </NavigationContainer>
+    </RecoilRoot>
 
   );
 }
