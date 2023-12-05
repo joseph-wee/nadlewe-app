@@ -10,22 +10,34 @@ const Result = ({ navigation, route }: any) => {
   // console.log(selectedTags); //잘 받아지는 지 확인
   // console.log(selectedCategory); //잘 받아지는 지 확인
 
+  const [result, setResult] = useState<any>([]);
+
   const sendToServer = async () => {
     //axios로 서버에 전송
     try {
       const tagKeys = selectedTags.map((tag: { key: any }) => tag.key);
-      const response = await axios.post("https://heheds.free.beeceptor.com", {
-        tagKeys,
-        selectedCategory,
-        priceRange,
-      });
+      const response = await axios.post(
+        "http://13.125.36.42:8080/api/courses",
+        {
+          tagKeys,
+          selectedCategory,
+          priceRange,
+        }
+      );
       console.log("서버 응답:", response.data);
+      return response.data;
     } catch (error) {
       console.error("서버 전송 오류:", error);
+      return;
     }
   };
 
-  const [result, setResult] = useState<any>([]);
+  /** 나중 api 연동시 */
+  // useEffect(() => {
+  //   sendToServer().then((res) => {
+  //     setResult(res.courses);
+  //   });
+  // }, []);
 
   const test1 = [
     { icon: 3, icon2: 4, id: "식사_1701704202842_dk78jlalk", key: "식사" },
@@ -112,17 +124,14 @@ const Result = ({ navigation, route }: any) => {
       }
       if (sum <= maxPrice && temp[0].placeName) {
         courses.push({
-          courses: [
-            {
-              courseName: temp[0].placeName,
-              places: temp,
-              coursePrice: sum,
-              courseImage: temp[0].placeImage,
-            },
-          ],
+          courseName: temp[0].placeName,
+          places: temp,
+          coursePrice: sum,
+          courseImage: temp[0].placeImage,
         });
       }
     }
+    console.log(courses);
     setResult([...courses]);
   };
 
@@ -172,10 +181,10 @@ const Result = ({ navigation, route }: any) => {
                     numberOfLines={1}
                     style={{ marginBottom: 20, fontFamily: "BM-HANNAStd" }}
                   >
-                    {`${data.courses[0].courseName}`}
+                    {`${data.courseName}`}
                   </Text>
                   {/** 장소, 별점 리스트 */}
-                  {data.courses[0].places.map((el: any, index2: number) => {
+                  {data.places.map((el: any, index2: number) => {
                     return (
                       <View
                         style={{ flexDirection: "row", marginBottom: 7 }}
@@ -241,14 +250,12 @@ const Result = ({ navigation, route }: any) => {
                     fontWeight: "700",
                     height: 20,
                   }}
-                >{`${data.courses[0].coursePrice.toLocaleString(
-                  "ko-KR"
-                )} 원`}</Text>
+                >{`${data.coursePrice.toLocaleString("ko-KR")} 원`}</Text>
               </View>
               {/** 이미지 */}
               {/**result[0].courses[0].courseImage */}
               <Image
-                source={{ uri: `${data.courses[0].courseImage}` }}
+                source={{ uri: `${data.courseImage}` }}
                 style={{
                   width: 150,
                   minHeight: 150,

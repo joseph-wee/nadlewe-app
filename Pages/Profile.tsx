@@ -19,7 +19,7 @@ const Profile = () => {
   const pointColor = "#2FDBBC";
 
   // 데이터 구조가 복잡하게 되어 있습니다. 혹시나 백엔드 쪽이 완성할 수도 있을 것 같아서 api 응답값 데이터 구조를 그대로 사용해서 그렇습니다.
-  // 장소에 대한 리스트는 like[?].courses[0].places 에 들어있습니다.
+  // 장소에 대한 리스트는 like[?].places 에 들어있습니다.
   // ? 에는 like 배열의 index로 0,1,2...이 들어갑니다.
   // recoil 전역상태 관리 라이브러리를 통해서 아래처럼 전역 상태 관리를 할 수 있습니다. 상세 페이지에서 좋아요를 누르면 아래 like에 값이 추가 됩니다.
   const [like, setLike] = useRecoilState(likeList);

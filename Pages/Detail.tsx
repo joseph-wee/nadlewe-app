@@ -8,7 +8,7 @@ const Detail = ({ route }: any) => {
     console.log(route.params);
   }, []);
   // 임시 데이터
-  const [detail, setDetail] = useState(route.params.courses[0].places);
+  const [detail, setDetail] = useState(route.params.places);
   const [isActive, setIsActive] = useState(false);
 
   const [like, setLike] = useRecoilState<any>(likeList);
