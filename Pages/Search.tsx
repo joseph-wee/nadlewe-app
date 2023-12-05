@@ -100,10 +100,19 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
   };
   return (
     <View style={tw`flex-1 bg-white px-4 py-4`}>
-      <Text style={tw`mb-2 text-gray-700`}>선호가격대</Text>
+      <Text
+            style={{
+              marginBottom: 5,
+              fontFamily: "BM-HANNAStd",
+              fontSize: 16,
+              marginRight: 5,
+            }}
+          >
+            선호가격대
+          </Text>
       <MultiSlider
         values={priceRange}
-        sliderLength={300}
+        sliderLength={370}
         onValuesChange={multiSliderValuesChange}
         min={10000}
         max={200000}
@@ -123,11 +132,26 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
           <View style={tw`h-5 w-5 rounded-full bg-red-600`} />
         )}
       />
-      <View style={tw`flex-row justify-between mt-4`}>
+      <View style={{
+            height: 70,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+      }
+        
+      }>
         <Text style={tw`text-lg`}>{`${priceRange[0].toLocaleString()} 원`}</Text>
         <Text style={tw`text-lg`}>{`${priceRange[1].toLocaleString()} 원`}</Text>
       </View>
-      <Text style={tw`mb-2 text-gray-700`}>데이트장소를 순서대로 선택해주세요</Text>
+      <Text
+            style={{
+              marginBottom: 15,
+              fontFamily: "BM-HANNAStd",
+              fontSize: 16,
+              marginRight: 5,
+            }}
+          >
+            데이트장소를 순서대로 선택해주세요
+          </Text>
 
       <View style={styles.container}>
         <FlatList
@@ -143,7 +167,16 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
           horizontal
         />
       </View>
-      <Text style={tw`mb-2 text-gray-700`}>데이트 코스 취향을 선택해주세요</Text>
+      <Text
+            style={{
+              marginBottom: 15,
+              fontFamily: "BM-HANNAStd",
+              fontSize: 16,
+              marginRight: 5,
+            }}
+          >
+            데이트 코스 취향을 선택해주세요
+          </Text>
       
       <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
       <Text style={styles.categoryText}>식사</Text>
@@ -225,6 +258,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
         onPress={sendToResult}
       >
         <Text style={tw`text-center text-white text-lg`}>CREATE CORSE</Text>
+
       </TouchableOpacity>
     </View>
     
@@ -236,7 +270,7 @@ const Search: React.FC<SearchProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    marginBottom: 3,
   },
   selectedTrack: {
     backgroundColor: '#2FDBBC',
@@ -245,7 +279,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#CDE5E9',
   },
   sliderContainer: {
-    height: 40,
+    height: 30,
+    
   },
   track: {
     height: 10,
@@ -268,9 +303,9 @@ const styles = StyleSheet.create({
   tag: {
     backgroundColor:'#2FDBBC',
     width:85,
-    height: 40,
+    height: 30,
     margin: 5,
-    padding: 5,
+    padding: 3,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 20,
@@ -323,6 +358,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryText:{
+    fontFamily: "BM-HANNAStd",
     backgroundColor: 'transparent',
     margin: 1, // 외부 여백
     padding: 1, // 내부 여백
