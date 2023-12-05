@@ -6,4 +6,3 @@ export { default as PaymentEnd } from "./PaymentEnd";
 export { default as Profile } from "./Profile";
 export { default as Register } from "./Register";
 export { default as Cart } from "./Cart";
-export { default as Favorite } from "./Favorite";

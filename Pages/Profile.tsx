@@ -13,8 +13,17 @@ import { NavigationProp } from "@react-navigation/native";
 import { useRecoilState } from "recoil";
 import likeList from "../likeData";
 
-const Profile = () => {
+const Profile = ({navigation,route}: any) => {
   // 예시
+  const widthHandler = (rate: number) => {
+    const quotient = Math.floor(rate / 1); // 몫
+
+    return rate * 15 + quotient * 2;
+  };
+  const sendToDetail = async (index: number) => {
+    navigation.navigate("Detail", like[index]);
+  };
+
   const orderData = Array.from({ length: 20 }, (_, i) => `주문 #${i + 1}`);
   const pointColor = "#2FDBBC";
 
@@ -41,43 +50,135 @@ const Profile = () => {
         <View style={styles.sectionContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
-              source={require("../assets/icons/clock.png")}
-              style={styles.icon}
-            />
-            <Text style={styles.sectionTitle}>주문내역</Text>
-          </View>
-          <FlatList
-            horizontal
-            data={orderData}
-            renderItem={({ item }) => <View style={styles.orderBox}></View>}
-            keyExtractor={(item, index) => index.toString()}
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-        <View style={styles.sectionContainer}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Image
               source={require("../assets/icons/Heart.png")}
               style={styles.icon}
             />
 
             <Text style={styles.sectionTitle}>내가 좋아요한 코스</Text>
           </View>
-          <FlatList
-            horizontal
-            data={orderData}
-            renderItem={({ item }) => <View style={styles.orderBox}></View>}
-            keyExtractor={(item, index) => index.toString()}
-            showsHorizontalScrollIndicator={false}
-          />
+          
+
+          <ScrollView style={{ backgroundColor: "white", flexGrow: 1 }}>
+      
+      {like &&
+        like.map((data: any, index1: number) => {
+          return (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={{
+                padding: 20,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                borderBottomColor: "#FFFFFF",
+                borderBottomWidth: 1,
+              }}
+              onPress={() => sendToDetail(index1)}
+              key={`${index1}-aaa`}
+            >
+              <View style={{ justifyContent: "space-between" }}>
+                <View>
+                  {/** 코스 이름 */}
+                  <Text
+                    numberOfLines={1}
+                    style={{ marginBottom: 20, fontFamily: "BM-HANNAStd" }}
+                  >
+                    {`${data.courseName}`}
+                  </Text>
+                  {/** 장소, 별점 리스트 */}
+                  {data.places.map((el: any, index2: number) => {
+                    return (
+                      <View
+                        style={{ flexDirection: "row", marginBottom: 7 }}
+                        key={`${index2}-bbb`}
+                      >
+                        <View
+                          style={{
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Text
+                            numberOfLines={1}
+                            style={{
+                              fontFamily: "NanumGothic",
+                              width: 100,
+
+                              fontSize: 12,
+                              flex: 1,
+                            }}
+                          >
+                            {`${el.placeName}`}
+                          </Text>
+                        </View>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            gap: 2,
+
+                            overflow: "hidden",
+                            width: widthHandler(el.rate),
+                            alignItems: "center",
+                          }}
+                        >
+                          <Image
+                            source={require("../assets/star.png")}
+                            style={{ width: 15, height: 15 }}
+                          />
+                          <Image
+                            source={require("../assets/star.png")}
+                            style={{ width: 15, height: 15 }}
+                          />
+                          <Image
+                            source={require("../assets/star.png")}
+                            style={{ width: 15, height: 15 }}
+                          />
+                          <Image
+                            source={require("../assets/star.png")}
+                            style={{ width: 15, height: 15 }}
+                          />
+                          <Image
+                            source={require("../assets/star.png")}
+                            style={{ width: 15, height: 15 }}
+                          />
+                        </View>
+                      </View>
+                    );
+                  })}
+                </View>
+                <Text
+                  style={{
+                    marginTop: 15,
+                    fontFamily: "NanumGothic",
+                    fontWeight: "700",
+                    height: 20,
+                  }}
+                >{`${data.coursePrice.toLocaleString("ko-KR")} 원`}</Text>
+              </View>
+              {/** 이미지 */}
+              {/**result[0].courses[0].courseImage */}
+              <Image
+                source={{ uri: `${data.courseImage}` }}
+                style={{
+                  width: 150,
+                  minHeight: 150,
+                  height: "100%",
+                  borderRadius: 20,
+                  resizeMode: "cover",
+                }}
+              />
+            </TouchableOpacity>
+          );
+        })}
+    </ScrollView>
+    
         </View>
-        <TouchableOpacity
+        
+      </View>
+      <TouchableOpacity
           style={[tw`rounded-full py-2 mb-4`, { backgroundColor: pointColor }]}
           onPress={() => console.log("로그아웃")}
         >
           <Text style={tw`text-center text-white text-lg`}>LOGOUT</Text>
         </TouchableOpacity>
-      </View>
     </GestureHandlerRootView>
   );
 };
